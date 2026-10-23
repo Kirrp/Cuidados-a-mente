@@ -1,0 +1,14 @@
+**/node_modules
+**/.git
+**/.local
+**/target
+**/data
+CUIDADOS-A-MENTE
+work
+tmp
+output
+backups
+.env*
+deploy/.env
+*.db*
+*.cam

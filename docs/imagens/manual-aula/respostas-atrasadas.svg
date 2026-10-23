@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="570" viewBox="0 0 1200 570" role="img" aria-labelledby="title desc">
+  <title id="title">Por que useCuidados ignora respostas atrasadas</title>
+  <desc id="desc">Uma requisição para Ana recebe versão 7. Ao mudar para Bruno, a nova requisição recebe versão 8. A resposta de Bruno chega primeiro e atualiza a tela. A resposta antiga de Ana chega depois, mas é ignorada porque 7 é diferente da versão atual 8.</desc>
+  <rect width="1200" height="570" rx="24" fill="#faf8ff"/>
+  <text x="50" y="53" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#301744">Por que uma resposta antiga é ignorada?</text>
+  <text x="50" y="91" font-family="Arial, sans-serif" font-size="18" fill="#5d526b">A rede pode responder fora da ordem em que os pedidos foram feitos.</text>
+  <line x1="75" y1="159" x2="1110" y2="159" stroke="#bda8d5" stroke-width="4"/>
+  <circle cx="130" cy="159" r="14" fill="#8b51c2"/><circle cx="416" cy="159" r="14" fill="#8b51c2"/><circle cx="712" cy="159" r="14" fill="#398b69"/><circle cx="1020" cy="159" r="14" fill="#c77462"/>
+  <g font-family="Arial, sans-serif" fill="#301744">
+    <rect x="50" y="203" width="238" height="195" rx="16" fill="#eee2fc"/><text x="72" y="242" font-size="21" font-weight="700">1. Escolhe Ana</text><text x="72" y="280" font-size="17">Pedido A começa.</text><text x="72" y="310" font-size="17">versãoAtual = 7</text><text x="72" y="350" font-size="16">A resposta demora.</text>
+    <rect x="337" y="203" width="238" height="195" rx="16" fill="#e2efff"/><text x="359" y="242" font-size="21" font-weight="700">2. Escolhe Bruno</text><text x="359" y="280" font-size="17">Pedido B começa.</text><text x="359" y="310" font-size="17">versãoAtual = 8</text><text x="359" y="350" font-size="16">A versão corrente vira 8.</text>
+    <rect x="625" y="203" width="238" height="195" rx="16" fill="#dff4e9"/><text x="647" y="242" font-size="21" font-weight="700">3. B chega antes</text><text x="647" y="280" font-size="17">8 = versão corrente</text><text x="647" y="310" font-size="17">Mostra Bruno.</text><text x="647" y="350" font-size="16">Atualização permitida.</text>
+    <rect x="912" y="203" width="238" height="195" rx="16" fill="#ffe7df"/><text x="934" y="242" font-size="21" font-weight="700">4. A chega depois</text><text x="934" y="280" font-size="17">7 ≠ versão corrente</text><text x="934" y="310" font-size="17">Ignora Ana.</text><text x="934" y="350" font-size="16">A tela continua Bruno.</text>
+  </g>
+  <rect x="50" y="445" width="1100" height="82" rx="15" fill="#fff" stroke="#dfd0ef" stroke-width="2"/>
+  <text x="72" y="478" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#694093">Regra do código</text>
+  <text x="72" y="506" font-family="Arial, sans-serif" font-size="18" fill="#301744">Só atualize o estado quando versaoAtual === versaoRequisicao.current.</text>
+</svg>

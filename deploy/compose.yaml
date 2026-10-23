@@ -1,0 +1,44 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/backend.Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SERVER_ADDRESS: 0.0.0.0
+      DATABASE_PATH: /data/cuidados.db
+      MEDIA_PATH: /data/media
+    volumes:
+      - /srv/cuidados/data:/data
+    ports:
+      - '127.0.0.1:8080:8080'
+    read_only: true
+    tmpfs:
+      - /tmp:uid=10001,gid=10001,mode=1700
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    mem_limit: 1g
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/web.Dockerfile
+      args:
+        EXPO_PUBLIC_API_URL: https://${APP_DOMAIN}/api
+    restart: unless-stopped
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Defina APP_DOMAIN}
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [api]
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  caddy_data:
+  caddy_config:

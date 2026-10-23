@@ -1,0 +1,25 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortMembers": "explicit"
+  },
+  "files.encoding": "utf8",
+  "explorer.sortOrder": "type",
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.expo": true,
+    "**/target": true,
+    "**/work": true,
+    "**/.local": true,
+    "**/dist": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/work": true,
+    "**/.local": true,
+    "**/backups": true,
+    "**/target": true
+  },
+  "java.compile.nullAnalysis.mode": "automatic"
+}

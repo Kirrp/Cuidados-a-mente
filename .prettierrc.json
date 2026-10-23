@@ -1,0 +1,14 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "plugins": ["prettier-plugin-java", "@prettier/plugin-xml"],
+  "overrides": [
+    {
+      "files": "*.java",
+      "options": { "arrowParens": "avoid" }
+    }
+  ]
+}

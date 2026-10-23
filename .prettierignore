@@ -1,0 +1,14 @@
+node_modules/
+.expo/
+.local/
+work/
+tmp/
+output/
+backups/
+dist/
+backend/target/
+backend/data/
+CUIDADOS-A-MENTE/
+package-lock.json
+docs/imagens/
+docs/MANUAL*.md

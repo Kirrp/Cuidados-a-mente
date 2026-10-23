@@ -1,0 +1,47 @@
+{
+  "folders": [
+    {
+      "name": "Cuidados à Mente",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit",
+      "source.sortMembers": "explicit"
+    },
+    "files.encoding": "utf8",
+    "java.jdt.ls.java.home": "C:/Users/User/Downloads/CUIDADOS-A-MENTE/CUIDADOS-A-MENTE/.local/tools/jdk-21.0.12.1+1",
+    "java.configuration.runtimes": [
+      {
+        "name": "JavaSE-21",
+        "path": "C:/Users/User/Downloads/CUIDADOS-A-MENTE/CUIDADOS-A-MENTE/.local/tools/jdk-21.0.12.1+1",
+        "default": true
+      }
+    ],
+    "explorer.sortOrder": "type",
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.expo": true,
+      "**/target": true,
+      "**/work": true,
+      "**/.local": true,
+      "**/dist": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/work": true,
+      "**/.local": true,
+      "**/backups": true,
+      "**/target": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "vscjava.vscode-java-pack",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode"
+    ]
+  }
+}

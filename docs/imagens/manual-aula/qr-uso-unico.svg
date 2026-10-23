@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Geração e consumo único do QR Code</title>
+  <desc id="desc">O adulto salva cadastro completo e pede o QR. O servidor gera segredo aleatório, guarda apenas hash com validade de dez minutos e mostra o código uma vez. O idoso escaneia e envia o segredo. DELETE RETURNING remove o código válido e abre sessão. Reuso ou expiração retorna erro 401.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#544071" stroke-width="2"/></marker></defs>
+  <rect width="1200" height="640" rx="24" fill="#faf8ff"/>
+  <text x="50" y="53" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#301744">QR Code: da geração ao primeiro acesso</text>
+  <text x="50" y="91" font-family="Arial, sans-serif" font-size="18" fill="#5d526b">O segredo do QR e a sessão do idoso são coisas diferentes.</text>
+  <g font-family="Arial, sans-serif" fill="#301744">
+    <rect x="50" y="128" width="320" height="130" rx="16" fill="#eee2fc"/><text x="72" y="162" font-size="20" font-weight="700">1. Adulto prepara acesso</text><text x="72" y="193" font-size="17">Cadastro completo; toca em</text><text x="72" y="219" font-size="17">“Gerar QR Code”.</text>
+    <rect x="440" y="128" width="320" height="130" rx="16" fill="#e2efff"/><text x="462" y="162" font-size="20" font-weight="700">2. Servidor gera segredo</text><text x="462" y="193" font-size="17">32 bytes aleatórios; guarda</text><text x="462" y="219" font-size="17">SHA-256 + validade 10 min.</text>
+    <rect x="830" y="128" width="320" height="130" rx="16" fill="#f9e9bd"/><text x="852" y="162" font-size="20" font-weight="700">3. Tela mostra QR</text><text x="852" y="193" font-size="17">Código original aparece</text><text x="852" y="219" font-size="17">para ser lido pelo idoso.</text>
+    <rect x="830" y="335" width="320" height="130" rx="16" fill="#eee2fc"/><text x="852" y="369" font-size="20" font-weight="700">4. Idoso lê o QR</text><text x="852" y="400" font-size="17">App envia o código em</text><text x="852" y="426" font-size="17">POST /auth/qr.</text>
+    <rect x="440" y="335" width="320" height="130" rx="16" fill="#e2efff"/><text x="462" y="369" font-size="20" font-weight="700">5. Código é consumido</text><text x="462" y="400" font-size="17">DELETE ... RETURNING</text><text x="462" y="426" font-size="17">apaga e devolve o vínculo.</text>
+    <rect x="50" y="335" width="320" height="130" rx="16" fill="#dff4e9"/><text x="72" y="369" font-size="20" font-weight="700">6. Sessão é criada</text><text x="72" y="400" font-size="17">Token de 12 horas permite</text><text x="72" y="426" font-size="17">abrir o painel do idoso.</text>
+  </g>
+  <path d="M370 193 H428" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M760 193 H818" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M990 258 V323" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M830 400 H772" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M440 400 H382" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="50" y="507" width="1100" height="91" rx="16" fill="#ffe7df"/>
+  <text x="72" y="543" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#6e3b37">Se for usado de novo ou vencer:</text>
+  <text x="72" y="574" font-family="Arial, sans-serif" font-size="17" fill="#6e3b37">O servidor responde 401; o adulto precisa gerar um novo código. Revogar acesso também encerra sessões existentes.</text>
+</svg>

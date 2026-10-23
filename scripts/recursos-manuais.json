@@ -1,0 +1,342 @@
+[
+  {
+    "id": "entrada",
+    "nome": "Cadastro mínimo",
+    "tela": "Tela inicial e Contas de idosos",
+    "passos": [
+      "Informe nome, e-mail e senha na conta adulta.",
+      "Leia os documentos e confirme os aceites separadamente.",
+      "No cadastro da pessoa, informe nome e confirme autorização válida."
+    ],
+    "efeito": "CPF, RG, nascimento, contato e endereço são opcionais.",
+    "limite": "O perfil Responsável não comprova representação legal.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/CuidadosController.java",
+    "marca": "String representacao = campoObrigatorio",
+    "n": 22,
+    "explica": "A validação exige autorização e um dos papéis aceitos. A transação grava cadastro, declaração e evento juntos.",
+    "diagrama": ["Dados mínimos", "Autorização válida", "Cadastro individual"]
+  },
+  {
+    "id": "qr",
+    "nome": "Acesso por QR",
+    "tela": "Contas de idosos e botão QR da tela inicial",
+    "passos": [
+      "Escolha a pessoa e gere o QR no acesso adulto.",
+      "No aparelho da pessoa, leia ou digite o código. Se o proprietário preparou credenciais, também pode usar e-mail e senha.",
+      "Confira o nome e aceite os documentos quando solicitado."
+    ],
+    "efeito": "A conta idosa acessa somente a pessoa vinculada.",
+    "limite": "QR vale dez minutos e é de uso único. Desconectar encerra sessões, desativa a senha opcional e preserva registros.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/CuidadosController.java",
+    "marca": "byte[] bytes = new byte[32]",
+    "n": 15,
+    "explica": "São gerados 32 bytes aleatórios. Apenas o hash fica no banco; a sessão ganha identificador e validade de doze horas.",
+    "diagrama": ["Gerar código", "Ler ou digitar", "Acesso próprio"]
+  },
+  {
+    "id": "registros",
+    "nome": "Rotinas, medicamentos e consultas",
+    "tela": "Painel e abas dos registros",
+    "passos": [
+      "Selecione a pessoa antes de criar ou editar.",
+      "Informe título, data, horário e detalhes necessários.",
+      "Use Concluir ou Reabrir conforme a permissão."
+    ],
+    "efeito": "Pesquisa e resumos usam apenas registros autorizados. Concluir registra a declaração do usuário.",
+    "limite": "O aplicativo não mede ingestão, prescreve doses nem agenda consultas com estabelecimentos.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/CuidadosController.java",
+    "marca": "String mutation = campoOpcional",
+    "n": 20,
+    "explica": "Primeiro são validados tipo e permissão. mutationId reconhece criação reenviada para evitar duplicação.",
+    "diagrama": ["Pessoa e área", "Registrar cuidado", "Conferir estado"]
+  },
+  {
+    "id": "historico",
+    "nome": "Histórico de autoria",
+    "tela": "Acompanhamento > Histórico",
+    "passos": [
+      "Selecione a pessoa e a área.",
+      "Leia ação, autor e instante.",
+      "Compare Antes e Depois para entender uma correção."
+    ],
+    "efeito": "Novas mudanças geram eventos separados, na mesma transação do registro.",
+    "limite": "Não reconstrói autoria antiga. Exibe até 300 eventos; retenção padrão de 365 dias.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/CuidadosController.java",
+    "marca": "var estadoAnterior = new LinkedHashMap<>(antes);",
+    "n": 22,
+    "explica": "O servidor usa o autor autenticado, copia os estados, retira mídia e grava UUID e horário UTC na trilha.",
+    "diagrama": ["Estado anterior", "Ação autenticada", "Estado novo e evento"]
+  },
+  {
+    "id": "diario",
+    "nome": "Diário e passagem de turno",
+    "tela": "Acompanhamento > Diário",
+    "passos": [
+      "Escolha Observação, Passagem de turno ou Correção.",
+      "Escreva o necessário para o cuidado.",
+      "Salve e confira autor e horário. Para corrigir, acrescente outra entrada."
+    ],
+    "efeito": "As entradas anteriores são preservadas. Adultos usam permissões de rotina.",
+    "limite": "Exibe até 200 entradas. Não substitui documentação clínica formal.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "public synchronized Map<String, Object> anotar(",
+    "n": 21,
+    "explica": "Exige adulto e criar_rotinas. Aceita três categorias e grava autor, texto e horário com evento de auditoria.",
+    "diagrama": ["Observar", "Anotar com autoria", "Próximo turno lê"]
+  },
+  {
+    "id": "convites",
+    "nome": "Convites e retirada de vínculo",
+    "tela": "Perfil > Permissões e Configurações",
+    "passos": [
+      "O responsável informa o e-mail de uma conta de cuidador existente.",
+      "O cuidador aceita ou recusa em Configurações.",
+      "Para sair, use Acompanhamento > Administração > Retirar meu acesso."
+    ],
+    "efeito": "Antes do aceite, os registros continuam inacessíveis. A retirada elimina os acessos do vínculo.",
+    "limite": "Convite vale sete dias. Antes do aceite aparece quem convidou, sem dados de cuidado.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "var c = linhas.getFirst();",
+    "n": 19,
+    "explica": "A consulta anterior restringe destinatário e validade. O aceite confere o dono atual e cria vínculo e permissões em transação.",
+    "diagrama": ["Enviar convite", "Cuidador confirma", "Liberar vínculo"]
+  },
+  {
+    "id": "revisao",
+    "nome": "Validade e revisão de acessos",
+    "tela": "Acompanhamento > Administração > Revisar acessos",
+    "passos": [
+      "Confira quem continua acompanhando a pessoa.",
+      "Revise as permissões e informe nova validade em AAAA-MM-DD.",
+      "Confirme a revisão ou retire acessos antigos."
+    ],
+    "efeito": "Vínculos aceitos começam com 90 dias. O servidor bloqueia acesso vencido.",
+    "limite": "Renovação limitada a um ano. Vínculos antigos recebem 90 dias a partir da migração.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/CuidadosController.java",
+    "marca": "Set<String> permissoesEfetivas(",
+    "n": 20,
+    "explica": "O método confere propriedade e vínculo válido. A consulta ilustrada bloqueia vínculo vencido; na sequência, a política determina as permissões efetivas. Consulte a função completa no arquivo indicado.",
+    "diagrama": ["Conferir pessoas", "Revisar e renovar", "Expiração bloqueia"]
+  },
+  {
+    "id": "transferencia",
+    "nome": "Transferência de administração",
+    "tela": "Acompanhamento > Administração e Configurações do destinatário",
+    "passos": [
+      "Informe e-mail do novo responsável e sua senha.",
+      "O destinatário confirma com a própria senha.",
+      "O novo dono revisa vínculos e gera outro QR."
+    ],
+    "efeito": "Preserva registros e retira acesso do administrador anterior.",
+    "limite": "Proposta vale 24 horas. A troca técnica não transfere representação jurídica.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "if (!administradorAnterior.equals(cuidados.donoDosDados(pessoa)))",
+    "n": 22,
+    "explica": "A origem é conferida novamente. A transação troca dono, incrementa versões e retira acessos delegados e QR.",
+    "diagrama": ["Origem confirma", "Destino confirma", "Novo dono revisa"]
+  },
+  {
+    "id": "contatos",
+    "nome": "Contatos de emergência por pessoa",
+    "tela": "Acompanhamento > Contatos e Idoso > Emergência",
+    "passos": [
+      "Confira a pessoa selecionada.",
+      "Cadastre contato principal e, se necessário, alternativo.",
+      "Na emergência, escolha contato e confirme no discador."
+    ],
+    "efeito": "Pessoas diferentes podem ter contatos diferentes. Alterações são auditadas.",
+    "limite": "Ligação depende de aparelho, rede e confirmação; não há acionamento automático.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/CuidadosController.java",
+    "marca": "Map<String, Object> contatoEmergencia(",
+    "n": 18,
+    "explica": "Busca contato pelo identificador da pessoa. Usa campos antigos do administrador somente como compatibilidade.",
+    "diagrama": ["Escolher pessoa", "Principal e alternativo", "Abrir discador"]
+  },
+  {
+    "id": "doses",
+    "nome": "Doses recorrentes",
+    "tela": "Acompanhamento > Doses recorrentes",
+    "passos": [
+      "Copie o plano já orientado: início, fim, horários e intervalo de dias.",
+      "Confira o fuso e toque em Programar doses.",
+      "Cada dose fica pendente; cancelar remove só futuras pendentes."
+    ],
+    "efeito": "Dois horários em dois dias geram quatro doses com estados próprios.",
+    "limite": "Até um ano, oito horários e 730 doses. Intervalo inteiro de 1 a 30 dias. Fuso do plano é preservado.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "for (LocalDate dia = dataInicial;",
+    "n": 18,
+    "explica": "O laço percorre dias e horários. Cada combinação recebe UUID, registro pendente e evento dose_programada.",
+    "diagrama": ["Período e horários", "Gerar cada dose", "Concluir ou cancelar"]
+  },
+  {
+    "id": "lembretes",
+    "nome": "Lembretes e privacidade",
+    "tela": "Perfil > Configurações > Lembretes do cuidado",
+    "passos": [
+      "Ative no nativo e permita notificações no sistema.",
+      "Escolha a antecedência das consultas; prefira aviso genérico em aparelho compartilhado.",
+      "Abra diariamente e confira o registro ao tocar no aviso."
+    ],
+    "efeito": "O aviso genérico não revela o medicamento. Tocar não conclui o registro.",
+    "limite": "Até 50 avisos nas próximas 12 horas, antes da sessão expirar. Web não agenda; entrega precisa de validação física.",
+    "arquivo": "src/core/notificacoes/lembretes.native.ts",
+    "marca": "body: preferencias.notification_details",
+    "n": 16,
+    "explica": "A escolha muda texto detalhado ou genérico. O aviso leva conta e área; o gatilho DATE agenda o instante calculado.",
+    "diagrama": ["Permitir avisos", "Agenda de 12 horas", "Abrir e conferir"]
+  },
+  {
+    "id": "offline",
+    "nome": "Offline e conflitos",
+    "tela": "Perfil > Configurações > Sincronização offline",
+    "passos": [
+      "Use build nativa com SQLCipher e ative o cache.",
+      "Atualize acessos com rede; consulte e altere registros armazenados por até 15 minutos.",
+      "Reconecte. Em conflito, compare versões, copie o necessário e descarte a alteração local antes de editar o servidor."
+    ],
+    "efeito": "Fila cifrada, até 100 alterações. O servidor revalida acesso e versão.",
+    "limite": "Cache de até 5 milhões de caracteres, sem mídias. Revogação só é conhecida ao reconectar. Saída, troca de sessão ou recusa de acesso limpa cache e fila.",
+    "arquivo": "src/core/offline/armazenamento.native.ts",
+    "marca": "const suporte = await db.getFirstAsync",
+    "n": 19,
+    "explica": "O código exige SQLCipher. A chave aleatória fica no SecureStore e é aplicada antes das tabelas privadas.",
+    "diagrama": ["Cache cifrado", "Fila com versão", "Revisar conflitos"]
+  },
+  {
+    "id": "email",
+    "nome": "Recuperação e confirmação de e-mail",
+    "tela": "Entrar > Recuperar acesso e Configurações",
+    "passos": [
+      "Solicite um código pelo e-mail da conta.",
+      "Cole o código recebido e escolha nova senha na recuperação.",
+      "Entre novamente; para verificar e-mail, use o fluxo de confirmação em Configurações."
+    ],
+    "efeito": "Códigos de uso único ficam como hash; recuperar remove todas as sessões da conta.",
+    "limite": "Validade de 30 minutos. Exige Resend, chave e remetente verificado. Sem configuração, a tela informa indisponibilidade.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "var t = token(hash, \"recuperacao\");",
+    "n": 13,
+    "explica": "Valida tipo e prazo do código, grava nova senha BCrypt e remove sessões e códigos de recuperação.",
+    "diagrama": ["Solicitar código", "Validar uma vez", "Nova senha"]
+  },
+  {
+    "id": "sessoes",
+    "nome": "Sessões e tentativas repetidas",
+    "tela": "Perfil > Configurações > Sessões abertas",
+    "passos": [
+      "Confira entrada atual, outras sessões e datas.",
+      "Encerre uma sessão ou todas as outras.",
+      "Se suspeitar de acesso indevido, recupere a senha."
+    ],
+    "efeito": "IDs de sessão permitem gerenciar acessos sem expor tokens utilizáveis.",
+    "limite": "Sessão dura 12 horas. Login: 10 tentativas por e-mail; autenticação: 40 POSTs por IP em 15 minutos. Proxy exige atenção operacional.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "public void revogarOutras(",
+    "n": 10,
+    "explica": "A exclusão filtra a própria conta e preserva o hash da sessão atual. Outra conta não pode encerrar esses acessos.",
+    "diagrama": ["Conferir entradas", "Encerrar outra sessão", "Bloquear token antigo"]
+  },
+  {
+    "id": "gps",
+    "nome": "Captura pontual de GPS",
+    "tela": "Idoso > Configurações > Compartilhar minha posição",
+    "passos": [
+      "O responsável habilita compartilhamento e cuidadores individualmente.",
+      "A pessoa idosa escolhe compartilhar no próprio aparelho e permite localização.",
+      "Toque em Enviar minha posição agora; para interromper, apague o ponto e desligue compartilhamento."
+    ],
+    "efeito": "Só a conta idosa vinculada envia posição; a API guarda o ponto mais recente com precisão e horário.",
+    "limite": "Sem rastreamento contínuo. Mais de 5 minutos é desatualizado; após 24 horas o ponto é retirado. Mapa externo é opcional.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "// A checagem e a gravação compartilham",
+    "n": 15,
+    "explica": "Este trecho exige o vínculo da conta idosa e revalida seu acesso. A continuação da função exige compartilhamento e confirmação explícita antes de gravar coordenadas.",
+    "diagrama": ["Titular escolhe", "Permissão do aparelho", "Último ponto"]
+  },
+  {
+    "id": "midia",
+    "nome": "Memórias e mídia privada",
+    "tela": "Memórias > Adicionar e Arquivo privado",
+    "passos": [
+      "Escolha a pessoa, a categoria e um arquivo.",
+      "Salve a memória com título e referência.",
+      "Para abrir, toque no arquivo; a API confere acesso novamente."
+    ],
+    "efeito": "Arquivos novos ficam fora do SQLite, identificados como media:UUID, sem URL pública.",
+    "limite": "JPEG, PNG, WebP, MP3, WAV e MP4; 10 MB por arquivo, 200 MB por pessoa. Upload sem memória expira em 24 horas.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/MidiaController.java",
+    "marca": "public ResponseEntity<FileSystemResource> download",
+    "n": 15,
+    "explica": "buscar exige ver_memorias. Arquivo existente sai com no-store, nosniff e disposição de anexo.",
+    "diagrama": ["Escolher arquivo", "Pasta privada", "Abrir autorizado"]
+  },
+  {
+    "id": "exportacao",
+    "nome": "Exportação dos registros",
+    "tela": "Acompanhamento > Exportar",
+    "passos": [
+      "Selecione pessoa e período de até um ano.",
+      "Na web, baixe HTML e imprima ou salve PDF no navegador.",
+      "No nativo, gere o PDF e escolha destino de compartilhamento."
+    ],
+    "efeito": "Inclui somente as áreas autorizadas, sem CPF, RG, endereço, GPS ou arquivos.",
+    "limite": "A cópia exportada fica fora do controle do aplicativo; escolha o destinatário com cuidado.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "for (String tipo : List.of(\"consultas\", \"medicamentos\", \"rotinas\"))",
+    "n": 19,
+    "explica": "Cada área exige ver_tipo. A consulta limita pessoa e período; a resposta identifica nome e data de geração.",
+    "diagrama": ["Pessoa e período", "Filtrar permissões", "Relatório legível"]
+  },
+  {
+    "id": "acessibilidade",
+    "nome": "Leitura e navegação acessíveis",
+    "tela": "Perfil > Configurações > Aparência e leitura",
+    "passos": [
+      "Escolha tema claro ou escuro e fonte de 100% a 160%.",
+      "Salve e confira rolagem e botões com fonte do sistema ampliada.",
+      "Use menu e abas autorizadas; valide também com leitor de tela."
+    ],
+    "efeito": "Fontes e altura de linha aumentam juntas. Botões informam estados e ícones decorativos deixam de disputar foco.",
+    "limite": "Correções não substituem teste com pessoas idosas, TalkBack e VoiceOver. Veja ACESSIBILIDADE.md.",
+    "arquivo": "src/core/tema/paleta.ts",
+    "marca": "if (typeof item === 'number'",
+    "n": 19,
+    "explica": "Multiplica fontSize e lineHeight pela escala, adapta cores por uso e percorre objetos internos.",
+    "diagrama": ["Ajustar leitura", "Conferir navegação", "Testar com pessoas"]
+  },
+  {
+    "id": "privacidade",
+    "nome": "Consentimentos e direitos",
+    "tela": "Configurações > Privacidade, consentimentos e meus direitos",
+    "passos": [
+      "Escolha Minha conta ou pessoa cujo cadastro administra.",
+      "Registre o pedido, guarde protocolo e acompanhe resposta.",
+      "Indique autorização válida e digite AUTORIZAR ou REVOGAR para confirmar."
+    ],
+    "efeito": "Revogar bloqueia cuidado, apaga posição GPS e invalida QR; a central continua acessível sem novo aceite.",
+    "limite": "Declaração não prova representação. O contato real do controlador precisa ser definido. Providências e cópias dependem do processo administrativo.",
+    "arquivo": "backend/src/main/java/com/cuidadosamente/backend/controlador/EvolucaoController.java",
+    "marca": "if (!permitido) {",
+    "n": 16,
+    "explica": "Revogação remove ponto, compartilhamento e QR na transação. A validação central bloqueia novas operações de cuidado.",
+    "diagrama": ["Escolher titular", "Pedido ou revogação", "Protocolo e resposta"]
+  },
+  {
+    "id": "operacao",
+    "nome": "Hospedagem, backup e métricas",
+    "tela": "deploy/ e scripts/backup.py — ferramentas do mantenedor",
+    "passos": [
+      "Configure domínio, HTTPS, uma API e disco persistente conforme OPERACAO.md.",
+      "Configure chave fora do projeto e o timer diário; backup pausa a API brevemente.",
+      "Restaure em pasta nova e valide antes de planejar troca do ambiente."
+    ],
+    "efeito": "Pacote AES-256-GCM reúne SQLite e mídia, manifesto e hashes. Métricas têm só contagens e duração.",
+    "limite": "Infraestrutura e contas externas não foram ativadas. Docker, systemd e nuvem requerem teste no servidor; restauração local usa dados sintéticos.",
+    "arquivo": "scripts/backup.py",
+    "marca": "if destino.exists():",
+    "n": 15,
+    "explica": "Recusa sobrescrever pastas. A cópia é autenticada em staging e só é publicada depois das verificações.",
+    "diagrama": ["Dados consistentes", "Backup cifrado", "Restaurar e validar"]
+  }
+]

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+  <title id="title">Dois resultados possíveis de uma transação SQLite</title>
+  <desc id="desc">Uma transação executa comandos em sequência. Se todos funcionarem, commit confirma o conjunto. Se qualquer comando falhar, rollback desfaz tudo, evitando dados parcialmente excluídos.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#544071" stroke-width="2"/></marker></defs>
+  <rect width="1200" height="580" rx="24" fill="#faf8ff"/>
+  <text x="50" y="53" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#301744">Transação: todos os passos juntos</text>
+  <text x="50" y="91" font-family="Arial, sans-serif" font-size="18" fill="#5d526b">Exemplo: excluir uma pessoa exige apagar registros, QR, sessões, vínculo e cadastro.</text>
+  <rect x="55" y="140" width="315" height="300" rx="18" fill="#eee2fc"/>
+  <text x="79" y="179" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#301744">Início da transação</text>
+  <text x="79" y="224" font-family="Arial, sans-serif" font-size="17" fill="#301744">1. Apagar QR pendente</text>
+  <text x="79" y="260" font-family="Arial, sans-serif" font-size="17" fill="#301744">2. Apagar sessões</text>
+  <text x="79" y="296" font-family="Arial, sans-serif" font-size="17" fill="#301744">3. Apagar vínculo e conta</text>
+  <text x="79" y="332" font-family="Arial, sans-serif" font-size="17" fill="#301744">4. Apagar registros</text>
+  <text x="79" y="368" font-family="Arial, sans-serif" font-size="17" fill="#301744">5. Apagar pessoa</text>
+  <path d="M370 278 H470" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="485" y="215" width="210" height="126" rx="17" fill="#e2efff"/>
+  <text x="512" y="262" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#301744">Verificar</text>
+  <text x="512" y="295" font-family="Arial, sans-serif" font-size="17" fill="#301744">Tudo funcionou?</text>
+  <path d="M695 250 H800" stroke="#398b69" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="710" y="231" font-family="Arial, sans-serif" font-size="17" fill="#398b69">SIM</text>
+  <rect x="815" y="139" width="315" height="145" rx="18" fill="#dff4e9"/>
+  <text x="841" y="190" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#245d47">COMMIT</text>
+  <text x="841" y="229" font-family="Arial, sans-serif" font-size="17" fill="#301744">Confirma todas as mudanças.</text>
+  <path d="M695 309 H755 V376 H800" fill="none" stroke="#c77462" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="708" y="351" font-family="Arial, sans-serif" font-size="17" fill="#a45144">NÃO</text>
+  <rect x="815" y="317" width="315" height="145" rx="18" fill="#ffe7df"/>
+  <text x="841" y="368" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#913f3a">ROLLBACK</text>
+  <text x="841" y="407" font-family="Arial, sans-serif" font-size="17" fill="#301744">Desfaz todas as mudanças.</text>
+  <rect x="55" y="496" width="1075" height="49" rx="12" fill="#fff" stroke="#dfd0ef" stroke-width="2"/>
+  <text x="78" y="526" font-family="Arial, sans-serif" font-size="17" fill="#301744">Resultado: o banco não fica com metade da exclusão feita.</text>
+</svg>

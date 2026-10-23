@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Dois caminhos para obter uma sessão</title>
+  <desc id="desc">Na abertura, o aplicativo lê o token salvo e consulta auth/me. Token válido restaura o usuário; token inválido é apagado. No login, a tela envia email e senha, recebe token e usuário, salva a sessão e abre o painel.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#544071" stroke-width="2"/></marker></defs>
+  <rect width="1200" height="620" rx="24" fill="#faf8ff"/>
+  <text x="50" y="53" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#301744">Sessão: o que acontece antes de entrar</text>
+  <text x="50" y="91" font-family="Arial, sans-serif" font-size="18" fill="#5d526b">A abertura tenta restaurar uma sessão; o login cria uma nova.</text>
+  <rect x="38" y="124" width="1124" height="224" rx="22" fill="#fff" stroke="#dfd0ef" stroke-width="2"/>
+  <text x="61" y="158" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#694093">CAMINHO A · ABRIR O APP</text>
+  <g font-family="Arial, sans-serif" text-anchor="middle" fill="#301744">
+    <rect x="65" y="188" width="206" height="76" rx="14" fill="#eee2fc"/><text x="168" y="219" font-size="18" font-weight="700">1. Ler token</text><text x="168" y="244" font-size="15">guardado no aparelho</text>
+    <rect x="337" y="188" width="206" height="76" rx="14" fill="#e2efff"/><text x="440" y="219" font-size="18" font-weight="700">2. Pedir /auth/me</text><text x="440" y="244" font-size="15">com Bearer token</text>
+    <rect x="610" y="188" width="206" height="76" rx="14" fill="#dff4e9"/><text x="713" y="219" font-size="18" font-weight="700">3a. Token válido</text><text x="713" y="244" font-size="15">guardar usuário</text>
+    <rect x="883" y="188" width="244" height="76" rx="14" fill="#ffe7df"/><text x="1005" y="219" font-size="18" font-weight="700">3b. Resposta 401</text><text x="1005" y="244" font-size="15">apagar token inválido</text>
+  </g>
+  <path d="M271 226 H326" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M543 226 H598" stroke="#398b69" stroke-width="3" marker-end="url(#arrow)"/><path d="M543 211 V176 H1005 V187" fill="none" stroke="#c77462" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="612" y="304" font-family="Arial, sans-serif" font-size="15" fill="#5d526b">Sem token: fica sem usuário. Em qualquer caso, “iniciando” termina.</text>
+  <rect x="38" y="367" width="1124" height="210" rx="22" fill="#fff" stroke="#dfd0ef" stroke-width="2"/>
+  <text x="61" y="401" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#694093">CAMINHO B · TOCAR EM ENTRAR</text>
+  <g font-family="Arial, sans-serif" text-anchor="middle" fill="#301744">
+    <rect x="65" y="433" width="206" height="82" rx="14" fill="#eee2fc"/><text x="168" y="465" font-size="18" font-weight="700">1. Tela de login</text><text x="168" y="489" font-size="15">e-mail + senha</text>
+    <rect x="337" y="433" width="206" height="82" rx="14" fill="#e2efff"/><text x="440" y="465" font-size="18" font-weight="700">2. POST /auth/login</text><text x="440" y="489" font-size="15">backend confere senha</text>
+    <rect x="610" y="433" width="206" height="82" rx="14" fill="#dff4e9"/><text x="713" y="465" font-size="18" font-weight="700">3. Receber sessão</text><text x="713" y="489" font-size="15">token + usuário</text>
+    <rect x="883" y="433" width="244" height="82" rx="14" fill="#f9e9bd"/><text x="1005" y="465" font-size="18" font-weight="700">4. Salvar e navegar</text><text x="1005" y="489" font-size="15">abrir /painel</text>
+  </g>
+  <path d="M271 474 H326" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M543 474 H598" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M816 474 H871" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="61" y="554" font-family="Arial, sans-serif" font-size="15" fill="#5d526b">Se a senha falhar, o backend responde erro e a tela mostra a mensagem; não salva token.</text>
+</svg>

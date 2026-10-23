@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="590" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+  <title id="title">Criação de uma consulta em seis passos</title>
+  <desc id="desc">A tela coleta os campos, transforma a data, requisitarApi envia POST, o controlador confere sessão e pessoa, BancoDados grava em SQLite, e a tela recarrega a lista ou mostra o erro.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#544071" stroke-width="2"/></marker></defs>
+  <rect width="1200" height="590" rx="24" fill="#faf8ff"/>
+  <text x="50" y="53" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#301744">Uma consulta: da tela até o banco</text>
+  <text x="50" y="91" font-family="Arial, sans-serif" font-size="18" fill="#5d526b">O mesmo caminho vale para medicamentos, rotinas e memórias, mudando o campo “tipo”.</text>
+  <g font-family="Arial, sans-serif" fill="#301744">
+    <rect x="50" y="130" width="330" height="125" rx="17" fill="#eee2fc"/><text x="72" y="165" font-size="20" font-weight="700">1. Formulário</text><text x="72" y="195" font-size="17">Guarda título, data e horário</text><text x="72" y="222" font-size="17">no estado “rascunho”.</text>
+    <rect x="435" y="130" width="330" height="125" rx="17" fill="#eee2fc"/><text x="457" y="165" font-size="20" font-weight="700">2. salvarRegistro()</text><text x="457" y="195" font-size="17">Converte 27/09/2026 para</text><text x="457" y="222" font-size="17">2026-09-27.</text>
+    <rect x="820" y="130" width="330" height="125" rx="17" fill="#e2efff"/><text x="842" y="165" font-size="20" font-weight="700">3. requisitarApi()</text><text x="842" y="195" font-size="17">Envia POST /registros, JSON</text><text x="842" y="222" font-size="17">e token Bearer.</text>
+    <rect x="820" y="332" width="330" height="125" rx="17" fill="#f9e9bd"/><text x="842" y="367" font-size="20" font-weight="700">4. criarRegistro()</text><text x="842" y="397" font-size="17">Valida sessão, aceite, pessoa</text><text x="842" y="424" font-size="17">autorizada e campos.</text>
+    <rect x="435" y="332" width="330" height="125" rx="17" fill="#dff4e9"/><text x="457" y="367" font-size="20" font-weight="700">5. BancoDados + SQLite</text><text x="457" y="397" font-size="17">INSERT grava a linha com</text><text x="457" y="424" font-size="17">status “pendente”.</text>
+    <rect x="50" y="332" width="330" height="125" rx="17" fill="#dff4e9"/><text x="72" y="367" font-size="20" font-weight="700">6. Tela atualizada</text><text x="72" y="397" font-size="17">Recebe resposta, fecha o</text><text x="72" y="424" font-size="17">formulário e recarrega.</text>
+  </g>
+  <path d="M380 192 H423" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M765 192 H808" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M985 255 V320" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M820 394 H777" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/><path d="M435 394 H392" stroke="#544071" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="50" y="493" width="1100" height="58" rx="12" fill="#ffe7df"/>
+  <text x="72" y="528" font-family="Arial, sans-serif" font-size="18" fill="#6e3b37">Se a validação falhar, não há INSERT: o backend devolve {message}, e a tela mostra o erro.</text>
+</svg>

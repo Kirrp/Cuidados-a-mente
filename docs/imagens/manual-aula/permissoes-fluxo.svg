@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+<rect width="1000" height="420" rx="24" fill="#f7f1fb"/>
+<text x="36" y="46" font-family="Arial" font-size="27" font-weight="700" fill="#422455">Uma permissão, do botão ao banco de dados</text>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#9560b8"/></marker></defs>
+<g font-family="Arial" text-anchor="middle" fill="#422455">
+<rect x="32" y="80" width="208" height="96" rx="15" fill="#e7d2f5"/><text x="136" y="119" font-size="20" font-weight="700">1. Responsável</text><text x="136" y="149" font-size="17">desliga Criar remédios</text>
+<rect x="273" y="80" width="208" height="96" rx="15" fill="#dceffc"/><text x="377" y="119" font-size="20" font-weight="700">2. App</text><text x="377" y="149" font-size="17">envia PUT + JSON</text>
+<rect x="514" y="80" width="208" height="96" rx="15" fill="#d8f1e5"/><text x="618" y="119" font-size="20" font-weight="700">3. Java</text><text x="618" y="149" font-size="17">verifica o dono</text>
+<rect x="755" y="80" width="208" height="96" rx="15" fill="#fff0ca"/><text x="859" y="119" font-size="20" font-weight="700">4. SQLite</text><text x="859" y="149" font-size="17">salva as concessões</text>
+<rect x="260" y="252" width="480" height="108" rx="17" fill="#fff" stroke="#cfb7df" stroke-width="2"/><text x="500" y="287" font-size="20" font-weight="700">Tentativa posterior de criar remédio</text><text x="500" y="317" font-size="18">O servidor consulta a permissão atual</text><text x="500" y="344" font-size="18">Sem concessão: resposta HTTP 403</text>
+</g>
+<g stroke="#9560b8" stroke-width="3" fill="none" marker-end="url(#a)"><path d="M242 128h25"/><path d="M483 128h25"/><path d="M724 128h25"/><path d="M859 181v63H746"/></g>
+</svg>

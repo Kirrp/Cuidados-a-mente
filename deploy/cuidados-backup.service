@@ -1,0 +1,5 @@
+[Unit]
+Description=Backup cifrado do Cuidados à Mente
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /opt/cuidados/deploy/backup.sh
