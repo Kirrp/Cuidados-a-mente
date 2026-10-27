@@ -58,3 +58,6 @@ backups/
 deploy/.env
 deploy/*.secret
 *.cam
+
+# Renders e folhas de conferência dos manuais
+/tmp/pdfs/

@@ -69,6 +69,8 @@
     "test:offline": "node scripts/test-offline.mjs",
     "docs:legal": "node scripts/sync-legal-docs.mjs",
     "docs:manuals": "node scripts/atualizar-manuais.mjs",
+    "docs:pdf": "python scripts/gerar-figuras-manuais.py && python scripts/generate-manual-pdfs.py",
+    "docs:check": "python scripts/verificar-manuais.py",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"scripts/**/*.{mjs,json,java}\" \"backend/src/**/*.java\" backend/pom.xml deploy/compose.yaml \"*.{json,js,ts}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"scripts/**/*.{mjs,json,java}\" \"backend/src/**/*.java\" backend/pom.xml deploy/compose.yaml \"*.{json,js,ts}\""
   },

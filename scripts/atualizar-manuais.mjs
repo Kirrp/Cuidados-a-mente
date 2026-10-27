@@ -2,6 +2,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
+const edicao = '2026-10-27';
 const recursos = JSON.parse(
   await fs.readFile(path.join(root, 'scripts/recursos-manuais.json'), 'utf8'),
 );
@@ -578,6 +579,32 @@ O clean code de 12/10/2026 reorganizou os fontes e atualizou os exemplos destes 
 
 `;
 
+// Os capítulos extensos permanecem editáveis e entram também nos PDFs.
+// Ao incorporar, ajusta os links que eram relativos a docs/manuais/.
+async function aprofundamento(nome) {
+  return (await fs.readFile(path.join(root, 'docs/manuais', nome), 'utf8')).replaceAll(
+    '](../',
+    '](',
+  );
+}
+usuario += await aprofundamento('aprofundamento-uso.md');
+sintaxe += await aprofundamento('aprofundamento-sintaxe.md');
+usuario = usuario.replace('Versão 2026-10-12.', 'Edição ' + edicao + '.');
+sintaxe = sintaxe.replace('Versão 2026-10-12.', 'Edição ' + edicao + '.');
+usuario = usuario.replace(
+  /## 28\. Contas preenchidas e acesso por senha[\s\S]*?(?=## 29\.)/,
+  `## 28. Contas de demonstração e acesso por senha
+
+As contas citadas em capturas e roteiros são fictícias. Esta documentação não distribui credenciais nem garante que uma instalação contenha um conjunto de demonstração. O mantenedor pode preparar um ambiente separado conforme CONTAS_PREENCHIDAS.md.
+
+1. Na entrada, escolha o perfil correspondente à sua conta.
+2. Para a pessoa idosa, use e-mail e senha somente se esse acesso foi preparado pelo proprietário, ou utilize um QR válido.
+3. Confira a pessoa acompanhada antes de abrir os registros.
+
+Não execute uma carga de demonstração no banco de cuidado real para seguir um tutorial.
+
+`,
+);
 await gravar('docs/MANUAL_USUARIO.md', usuario);
 await gravar('docs/MANUAL-AULA.md', aula);
 await gravar('docs/MANUAL-SINTAXE.md', sintaxe);

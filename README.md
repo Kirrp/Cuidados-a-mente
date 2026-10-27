@@ -31,11 +31,13 @@ Consulte a [situação das 26 recomendações](docs/RECOMENDACOES.md), incluindo
 
 | Leitura | Markdown editável | PDF |
 | --- | --- | --- |
-| Usar o aplicativo | [Manual do usuário](docs/MANUAL_USUARIO.md) | [Manual do usuário ilustrado](output/pdf/manual-usuario-cuidados-a-mente.pdf) |
+| Usar o aplicativo — 66 páginas | [Manual do usuário](docs/MANUAL_USUARIO.md) | [Manual do usuário ilustrado](output/pdf/manual-usuario-cuidados-a-mente.pdf) |
 | Entender as funcionalidades e seu código | [Manual-aula](docs/MANUAL-AULA.md) | [Manual-aula ilustrado](output/pdf/manual-aula-cuidados-a-mente.pdf) |
-| Aprender os sinais das linguagens | [Manual de sintaxe](docs/MANUAL-SINTAXE.md) | [Manual de sintaxe ilustrado](output/pdf/manual-sintaxe-cuidados-a-mente.pdf) |
+| Aprender os sinais das linguagens — 53 páginas | [Manual de sintaxe](docs/MANUAL-SINTAXE.md) | [Manual de sintaxe ilustrado](output/pdf/manual-sintaxe-cuidados-a-mente.pdf) |
 
-Os manuais incluem passos, diagramas, exemplos reais numerados e explicações. Gere novamente com `npm run docs:manuals` ao mover linhas do código; veja o procedimento de PDF em [Como executar](docs/COMO_EXECUTAR.md).
+Edição ampliada de **27/10/2026**: são **119 páginas nos dois manuais principais**, com capturas de demonstração, diagramas, sumário clicável, marcadores, exercícios resolvidos e roteiros por perfil. O manual-aula permanece como leitura complementar, com 31 páginas. O [catálogo dos manuais](docs/manuais/README.md) reúne downloads, conteúdo e instruções de reprodução.
+
+`npm run docs:manuals` atualiza os trechos extraídos dos fontes; `npm run docs:pdf` gera os PDFs com o ambiente Python preparado. Veja o procedimento em [Como executar](docs/COMO_EXECUTAR.md).
 
 ## Documentação técnica
 

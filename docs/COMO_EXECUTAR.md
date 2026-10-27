@@ -48,9 +48,21 @@ Para exportar a web: `npx expo export --platform web --output-dir work/web-previ
 
 ## Manuais e PDF
 
-`npm run docs:manuals` atualiza figuras e trechos numerados lendo o código atual. Depois, com Python, ReportLab, Pillow e Sharp disponíveis, execute `python scripts/generate-manual-pdfs.py`. Os três PDFs ficam em output/pdf. Abra os arquivos e confira a renderização ao modificar a diagramação.
+`npm run docs:manuals` atualiza figuras e trechos numerados lendo o código atual e incorpora os capítulos extensos de `docs/manuais/`. Os PDFs publicados ficam em `output/pdf`. Para reproduzir, use Python 3.12 ou superior, um ambiente virtual e as dependências versionadas:
 
-`scripts/verificar-manuais.py` renderiza os PDFs e cria folhas de conferência em `tmp/pdfs/qa`. Ele requer Poppler (`pdftoppm`) e verifica o texto das páginas; confira também as imagens para detectar cortes ou sobreposição. Os trechos são copiados dos fontes: depois de usar `npm run format`, execute novamente `npm run docs:manuals` antes de gerar os PDFs.
+```bash
+python -m venv .local/manuais-venv
+# Linux/macOS:
+source .local/manuais-venv/bin/activate
+# No PowerShell, use: .local/manuais-venv/Scripts/Activate.ps1
+python -m pip install -r scripts/requirements-manuais.txt
+npm run docs:manuals
+npm run docs:pdf
+```
+
+A geração usa ReportLab, Pillow e CairoSVG; não depende de Sharp nem de uma instalação completa das dependências Expo. CairoSVG precisa da biblioteca Cairo no sistema. Em Debian/Ubuntu, os pacotes relevantes são `libcairo2` e `fonts-dejavu-core`. No Windows, fontes Arial/Consolas são detectadas automaticamente; Cairo precisa estar instalado e disponível conforme a documentação do CairoSVG. No macOS, instale Cairo e fontes DejaVu; se necessário, configure `MANUAL_FONTS_DIR` com a pasta contendo `DejaVuSans.ttf`, `DejaVuSans-Bold.ttf`, `DejaVuSans-Oblique.ttf` e `DejaVuSansMono.ttf`.
+
+`npm run docs:check` renderiza os PDFs e cria folhas de conferência em `tmp/pdfs/qa`, ignoradas pelo Git. Requer Poppler (`pdftoppm`; pacote `poppler-utils` em Debian/Ubuntu) e verifica o texto das páginas; confira também as imagens para detectar cortes ou sobreposição. Depois de usar `npm run format`, execute novamente `npm run docs:manuals` antes de gerar os PDFs. A inspeção dos PDFs não substitui testes do aplicativo nem valida recursos nativos.
 
 ## Manter o clean code
 
